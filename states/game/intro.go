@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hpdobrica/starbreach/game"
+	"github.com/hpdobrica/starbreach/state"
 	"github.com/hpdobrica/starbreach/util"
 )
 
@@ -15,14 +16,15 @@ type IntroState struct {
 	background      *ebiten.Image
 	initialDuration int
 	game            *game.Game
+	stateMachine    *state.StateMachine
 }
 
 func NewIntroState(duration int, game *game.Game) *IntroState {
 	return &IntroState{duration: duration, initialDuration: duration, game: game}
 }
 
-func (i IntroState) Init() {
-
+func (i *IntroState) Init(stateMachine *state.StateMachine) {
+	i.stateMachine = stateMachine
 }
 
 func (i *IntroState) Update() {

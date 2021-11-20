@@ -1,9 +1,7 @@
-package statemachine
-
-import "github.com/hpdobrica/starbreach/state"
+package state
 
 type StateMachine struct {
-	states []*state.State
+	states []*State
 }
 
 func NewStateMachine() *StateMachine {
@@ -14,11 +12,12 @@ func NewStateMachine() *StateMachine {
 
 // }
 
-func (s *StateMachine) PushState(state state.State) {
+func (s *StateMachine) PushState(state State) {
+	state.Init(s)
 	s.states = append(s.states, &state)
 }
 
-func (s *StateMachine) PopState() (*state.State, bool) {
+func (s *StateMachine) PopState() (*State, bool) {
 	stackLength := len(s.states)
 	if stackLength == 0 {
 		return nil, false
@@ -30,7 +29,7 @@ func (s *StateMachine) PopState() (*state.State, bool) {
 	return el, true
 }
 
-func (s StateMachine) CurrentState() *state.State {
+func (s StateMachine) CurrentState() *State {
 	stackLength := len(s.states)
 	if stackLength == 0 {
 		return nil

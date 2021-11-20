@@ -8,20 +8,22 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hpdobrica/starbreach/game"
+	"github.com/hpdobrica/starbreach/state"
 	"github.com/hpdobrica/starbreach/tiles"
 )
 
 type MainMenuState struct {
-	game       *game.Game
-	background *ebiten.Image
+	game         *game.Game
+	background   *ebiten.Image
+	stateMachine *state.StateMachine
 }
 
 func NewMainMenuState(game *game.Game) *MainMenuState {
 	return &MainMenuState{game: game}
 }
 
-func (i MainMenuState) Init() {
-
+func (m *MainMenuState) Init(stateMachine *state.StateMachine) {
+	m.stateMachine = stateMachine
 }
 
 func (i *MainMenuState) Update() {
@@ -30,8 +32,8 @@ func (i *MainMenuState) Update() {
 		x, y := ebiten.CursorPosition()
 		if (x >= 25 && x <= 95) && (y >= 25 && y <= 50) {
 			fmt.Println("New Game!")
-			deployState := NewDeployState(i.game)
-			i.game.StateMachine.PushState(deployState)
+			mainGameState := NewMainGameState(i.game)
+			i.game.StateMachine.PushState(mainGameState)
 		}
 
 		if (x >= 25 && x <= 95) && (y >= 55 && y <= 80) {

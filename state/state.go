@@ -1,9 +1,11 @@
 package state
 
-import "github.com/hajimehoshi/ebiten/v2"
+import (
+	"github.com/hajimehoshi/ebiten/v2"
+)
 
 type State interface {
-	Init()
+	Init(*StateMachine)
 
 	// Pause()
 	// Resume()

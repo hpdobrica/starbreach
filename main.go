@@ -9,7 +9,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hpdobrica/starbreach/game"
-	"github.com/hpdobrica/starbreach/statemachine"
+	"github.com/hpdobrica/starbreach/state"
 	gamestates "github.com/hpdobrica/starbreach/states/game"
 	"github.com/hpdobrica/starbreach/tiles"
 )
@@ -37,8 +37,8 @@ func main() {
 	}
 }
 
-func buildGameStateMachine(gameObj *game.Game) *statemachine.StateMachine {
-	stateMachine := statemachine.NewStateMachine()
+func buildGameStateMachine(gameObj *game.Game) *state.StateMachine {
+	stateMachine := state.NewStateMachine()
 
 	introState := gamestates.NewIntroState(300, gameObj)
 
