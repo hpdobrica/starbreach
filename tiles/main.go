@@ -1,4 +1,4 @@
-package tileutil
+package tiles
 
 import (
 	"bytes"
@@ -11,24 +11,24 @@ import (
 
 type Tiles struct {
 	asset    *ebiten.Image
-	tileSize int
+	TileSize int
 }
 
-func BuildTiles(resources embed.FS, path string, tileSize int) *Tiles {
+func New(resources embed.FS, path string, tileSize int) *Tiles {
 	img := getImage(resources, path)
 
 	return &Tiles{
 		asset:    img,
-		tileSize: tileSize,
+		TileSize: tileSize,
 	}
 }
 
 func (t Tiles) GetTileAt(x, y int) *ebiten.Image {
-	x1 := x * t.tileSize
-	x2 := y * t.tileSize
+	x1 := x * t.TileSize
+	x2 := y * t.TileSize
 
-	y1 := x1 + t.tileSize
-	y2 := x2 + t.tileSize
+	y1 := x1 + t.TileSize
+	y2 := x2 + t.TileSize
 
 	return t.asset.SubImage(image.Rect(x1, x2, y1, y2)).(*ebiten.Image)
 
