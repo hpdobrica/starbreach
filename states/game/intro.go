@@ -30,8 +30,9 @@ func (i *IntroState) Update() {
 	fmt.Println(i.duration)
 
 	if i.duration <= 0 {
-		deployState := NewDeployState(i.game)
-		i.game.StateMachine.PushState(deployState)
+		mainMenuState := NewMainMenuState(i.game)
+		i.game.StateMachine.PopState()
+		i.game.StateMachine.PushState(mainMenuState)
 		// transition to other state
 	}
 }

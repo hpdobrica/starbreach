@@ -18,7 +18,7 @@ func (s *StateMachine) PushState(state state.State) {
 	s.states = append(s.states, &state)
 }
 
-func (s *StateMachine) PopState(state *state.State) (*state.State, bool) {
+func (s *StateMachine) PopState() (*state.State, bool) {
 	stackLength := len(s.states)
 	if stackLength == 0 {
 		return nil, false
