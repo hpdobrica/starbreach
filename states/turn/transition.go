@@ -19,7 +19,7 @@ type TurnTransitionState struct {
 }
 
 func NewTurnTransitionState(game *game.Game, turnNumber, player int) *TurnTransitionState {
-	return &TurnTransitionState{game: game}
+	return &TurnTransitionState{game: game, turnNumber: turnNumber, player: player}
 }
 
 func (t *TurnTransitionState) Init(stateMachine *state.StateMachine) {
